@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.springboot.treino.entidades.Usuario;
+
+import com.springboot.treino.domain.Usuario;
 import com.springboot.treino.repositorios.UsuarioRepositorio;
 
 @Service
