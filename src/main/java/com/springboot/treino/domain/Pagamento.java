@@ -1,7 +1,7 @@
 package com.springboot.treino.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,28 +14,28 @@ public class Pagamento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDate momento;
+	private Instant momento;
 
 	private Pedido pedido;
 
 	public Pagamento() {
 	}
 
-	public Pagamento(LocalDate momento, Pedido pedido) {
+	public Pagamento(Instant momento) {
 		super();
 		this.momento = momento;
-		this.pedido = pedido;
+		
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public LocalDate getMomento() {
+	public Instant getMomento() {
 		return momento;
 	}
 
-	public void setMomento(LocalDate momento) {
+	public void setMomento(Instant momento) {
 		this.momento = momento;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.springboot.treino.domain.Pedido;
 import com.springboot.treino.domain.Usuario;
+import com.springboot.treino.enuns.StatusPedido;
 import com.springboot.treino.repositorios.PedidoRepositorio;
 import com.springboot.treino.repositorios.UsuarioRepositorio;
 
@@ -28,9 +29,9 @@ public class TestConfig implements CommandLineRunner {
 		Usuario user1 = new Usuario(null, "Carla Jessica", "carla@gmail.com", "8598854515", "1234");
 		Usuario user2 = new Usuario(null, "David", "david@gmail.com", "8596581526", "1234");
 		
-		Pedido o1 = new Pedido( Instant.parse("2019-06-20T19:53:07Z"), user1); 
-		Pedido o2 = new Pedido( Instant.parse("2019-07-21T03:42:10Z"), user2); 
-		Pedido o3 = new Pedido( Instant.parse("2019-07-22T15:21:22Z"), user1); 
+		Pedido o1 = new Pedido( Instant.parse("2019-06-20T19:53:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO, user1); 
+		Pedido o2 = new Pedido( Instant.parse("2019-07-21T03:42:10Z"),StatusPedido.PAGAMENTO_EFETUADO, user2); 
+		Pedido o3 = new Pedido( Instant.parse("2019-07-22T15:21:22Z"),StatusPedido.AGUARDANDO_PAGAMENTO ,user1); 
 
 		
 		usuarioRepositorio.saveAll(Arrays.asList(user1,user2));

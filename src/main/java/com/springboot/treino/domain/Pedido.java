@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.springboot.treino.enuns.StatusPedido;
+
 
 
 @Entity
@@ -20,9 +22,9 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant momento;
-	//private Integer statusPedido;
+	private Integer statusPedido;
 
-	//private Pagamento pagamento;
+	private Pagamento pagamento;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -31,11 +33,10 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
-	public Pedido(Instant momento, /*StatusPedido statusPedido, Pagamento pagamento,*/ Usuario cliente) {
+	public Pedido(Instant momento, StatusPedido statusPedido,  Usuario cliente) {
 		super();
 		this.momento = momento;
-		//this.statusPedido = statusPedido.getCod();
-		//this.pagamento = pagamento;
+		this.statusPedido = statusPedido.getCod();
 		this.cliente = cliente;
 	}
 
@@ -51,12 +52,12 @@ public class Pedido implements Serializable {
 		this.momento = momento;
 	}
 
-	/*public Integer getStatusPedido() {
-		return statusPedido;
+	public StatusPedido getStatusPedido() {
+		return StatusPedido.retornoPedido(statusPedido);
 	}
 
-	public void setStatusPedido(Integer statusPedido) {
-		this.statusPedido = statusPedido;
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido.getCod();
 	}
 
 	public Pagamento getPagamento() {
@@ -65,7 +66,7 @@ public class Pedido implements Serializable {
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
-	}*/
+	}
 
 	public Usuario getCliente() {
 		return cliente;
