@@ -13,9 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.treino.enuns.StatusPedido;
-
-
 
 @Entity
 public class Pedido implements Serializable {
@@ -32,6 +31,7 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Usuario cliente;
+	
 	
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
