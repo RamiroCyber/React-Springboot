@@ -3,7 +3,6 @@ package com.springboot.treino.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
@@ -27,6 +29,9 @@ public class Produto implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "CATEGORIA_PRODUTO", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> categorias = new HashSet<>();
+
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Produto() {
 	}
@@ -81,6 +86,15 @@ public class Produto implements Serializable {
 
 	public Set<Categoria> getCategorias() {
 		return categorias;
+	}
+
+	@JsonIgnore
+	public Set<Pedido> getPedidos() {
+		Set<Pedido> pedidos = new HashSet<>();
+		for (ItemPedido x : itens) {
+			pedidos.add(x.getPedido());
+		}
+		return pedidos;
 	}
 
 	@Override

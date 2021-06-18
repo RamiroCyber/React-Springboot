@@ -14,7 +14,7 @@ public class ItemPedido implements Serializable {
 
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
+
 	private Integer quantidade;
 	private Double preco;
 

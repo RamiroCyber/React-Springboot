@@ -1,8 +1,8 @@
 package com.springboot.treino.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +24,9 @@ public class Usuario implements Serializable {
 	private String telefone;
 	private String senha;
 
-	
 	@OneToMany(mappedBy = "cliente")
-	@JsonIgnore 
-	private List<Pedido> pedidos = new ArrayList<>();
+	@JsonIgnore
+	private Set<Pedido> pedidos = new HashSet<>();
 
 	public Usuario() {
 	}
@@ -80,7 +79,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public List<Pedido> getPedidos() {
+	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
 
