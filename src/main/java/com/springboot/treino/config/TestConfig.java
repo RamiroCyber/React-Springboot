@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.springboot.treino.domain.Categoria;
 import com.springboot.treino.domain.ItemPedido;
+import com.springboot.treino.domain.Pagamento;
 import com.springboot.treino.domain.Pedido;
 import com.springboot.treino.domain.Produto;
 import com.springboot.treino.domain.Usuario;
@@ -23,22 +24,22 @@ import com.springboot.treino.repositorios.UsuarioRepositorio;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
-	
+
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 
 	@Autowired
 	private PedidoRepositorio pedidoRepositorio;
-	
+
 	@Autowired
 	private CategoriaRepositorio categoriaRepositorio;
-	
+
 	@Autowired
 	private ProdutoRepositorio produtoRepositorio;
-	
+
 	@Autowired
 	private ItemPedidoRepositorio itemPedidoRepositorio;
-	
+
 	@Override
 	public void run(String... args) throws Exception {
 		Usuario user1 = new Usuario(null, "Carla Jessica", "carla@gmail.com", "8598854515", "1234");
@@ -81,5 +82,8 @@ public class TestConfig implements CommandLineRunner {
 		
 		itemPedidoRepositorio.saveAll(Arrays.asList(ip1,ip2,ip3,ip4));
 		
+		Pagamento pag1 = new Pagamento(Instant.parse("2020-06-20T23:53:07Z"),o1);
+		o1.setPagamento(pag1);
+		pedidoRepositorio.save(o1);
 	}
 }

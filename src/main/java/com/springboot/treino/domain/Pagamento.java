@@ -2,10 +2,15 @@ package com.springboot.treino.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pagamento implements Serializable {
@@ -16,14 +21,18 @@ public class Pagamento implements Serializable {
 	private Long id;
 	private Instant momento;
 
+	@OneToOne
+	@JsonIgnore
+	@MapsId
 	private Pedido pedido;
 
 	public Pagamento() {
 	}
 
-	public Pagamento(Instant momento) {
+	public Pagamento(Instant momento, Pedido pedido) {
 		super();
 		this.momento = momento;
+		this.pedido = pedido;
 
 	}
 

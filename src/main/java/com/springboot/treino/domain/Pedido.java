@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.springboot.treino.enuns.StatusPedido;
 
 @Entity
@@ -23,6 +27,7 @@ public class Pedido implements Serializable {
 	private Instant momento;
 	private Integer statusPedido;
 
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private Pagamento pagamento;
 
 	@ManyToOne
@@ -84,6 +89,14 @@ public class Pedido implements Serializable {
 
 	public Set<ItemPedido> getItens() {
 		return itens;
+	}
+
+	public Double getTotal() {
+		double soma = 0;
+		for (ItemPedido x : itens) {
+			soma += x.getSubtotal();
+		}
+		return soma;
 	}
 
 	@Override
