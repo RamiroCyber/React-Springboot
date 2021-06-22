@@ -20,6 +20,6 @@ public class CategoriaService {
 
 	public Categoria buscarPorId(Long id) {
 		Optional<Categoria> obj = categoriaRepositorio.findById(id);
-		return obj.orElse(null);
+		return obj.get();
 	}
 }

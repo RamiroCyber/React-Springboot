@@ -22,7 +22,7 @@ public class UsuarioService {
 
 	public Usuario buscarPorId(Long id) {
 		Optional<Usuario> obj = usuarioRepositorio.findById(id);
-		return obj.orElse(null);
+		return obj.get();
 	}
 
 	public Usuario inserirUser(Usuario usuario) {

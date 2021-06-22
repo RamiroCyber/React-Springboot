@@ -20,6 +20,6 @@ public class PedidoService {
 
 	public Pedido buscarPorId(Long id) {
 		Optional<Pedido> obj = pedidoRepositorio.findById(id);
-		return obj.orElse(null);
+		return obj.get();
 	}
 }
